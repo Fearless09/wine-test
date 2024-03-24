@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { data } from '@/data'
 import { useRouter } from 'next/navigation'
 
-export default function page({ params }) {
+export default function Page({ params }) {
     const { id } = params
     const [wine, setWine] = useState({})
     const router = useRouter()
