@@ -56,7 +56,7 @@ export default function Page() {
                 ...{ uuid: uuidv4() }
             }
             setWines(prevWines => [...prevWines, concatenatedNewWine]);
-            console.log(concatenatedNewWine)
+            // console.log(concatenatedNewWine)
         }
     }
 
@@ -83,9 +83,9 @@ export default function Page() {
                 </h1>
                 <form onSubmit={addWine}>
                     {/* Input Field */}
-                    <div className='mt-8 grid md:grid-cols-2 gap-x-5 gap-y-8'>
+                    <div className='mt-8 md:grid grid-cols-2 space-y-8 md:space-y-0 gap-x-5 gap-y-8'>
                         {/* Name */}
-                        <div className='flex flex-col gap-2'>
+                        <div className='w-full flex flex-col gap-2'>
                             <label htmlFor="name" className='px-1'>
                                 Name:
                             </label>
