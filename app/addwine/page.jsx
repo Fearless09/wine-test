@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { AppContext } from '../Context'
 import { v4 as uuidv4 } from 'uuid';
 
-export default function page() {
+export default function Page() {
     const { wines, setWines, address } = useContext(AppContext)
     const [newWine, setNewWine] = useState({
         name: null,
