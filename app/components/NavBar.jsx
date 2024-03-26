@@ -47,6 +47,7 @@ export default function NavBar() {
                         >
                             <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 rounded-full w-0 group-hover:w-full bg-[#B98D58] ${pathname === "/admin" && 'w-full'}`}></span>
                             <span className='p-2'>Admin</span>
+                            <span className=' absolute top-0 -translate-y-1/2 right-0 translate-x-1/2 w-6 aspect-square rounded-full bg-[#B98D58]/85 flex items-center justify-center font-medium text-sm'>{requestingAuthorization?.length}</span>
                         </Link>
                     )}
                     {/* Add Wine */}
