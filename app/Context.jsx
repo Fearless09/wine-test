@@ -1,4 +1,5 @@
 "use client"
+import { v4 as uuidv4 } from 'uuid';
 import React, { createContext, useState } from "react";
 
 export const AppContext = createContext()
@@ -27,9 +28,32 @@ export default function AppContextProvider({ children }) {
             image: "/new/2.webp",
             owner_address: ""
         },
+        {
+            uuid: 'b0f8660f-f049-4325-bf30-dfab07ebfa06',
+            name: `2015 Aloxe Corton Remy Gautier`,
+            year: 2015,
+            country: 'France',
+            type: 'Pinot Noir',
+            price: '$180.00',
+            description: `Persistent and mineral on the finish and aftertaste, Aloxe Corton Remy Gautier 2017 has a translucent pink color. The nose combines notes of fresh red fruit with pleasant hints of vanilla. It has a distinctive lengthy finish.`,
+            image: "/new/3.webp",
+            owner_address: ""
+        },
+        {
+            uuid: '989c5b68-5348-4d14-9b48-6fcc80b8c5eb',
+            name: `2017 Volnay Marcel Frecourt`,
+            year: 2013,
+            country: 'Rome',
+            type: 'Pinot Noir',
+            price: '$120.00',
+            description: `The first contemporary red wine blended with untraditional varieties (specifically Merlot) and one of the first red wines in the Chianti Classico region that didn’t use white grapes. Volnay Marcel Frecourt is a milestone. It’s produced with a selection of Sangiovese, Cabernet Sauvignon and Cabernet Franc. `,
+            image: "/new/4.webp",
+            owner_address: ""
+        },
     ])
     const [address, setAddress] = useState(null)
 
+    console.log(uuidv4())
     return (
         <AppContext.Provider
             value={{ wines, setWines, address, setAddress }}
