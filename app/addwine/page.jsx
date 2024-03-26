@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import { BackSVG } from '../components/Svgs'
 import { useRouter } from 'next/navigation'
@@ -7,7 +7,7 @@ import { AppContext } from '../Context'
 import { v4 as uuidv4 } from 'uuid';
 
 export default function Page() {
-    const { wines, setWines, address } = useContext(AppContext)
+    const { setWines, address, authorizedAddress } = useContext(AppContext)
     const [newWine, setNewWine] = useState({
         name: null,
         year: null,
@@ -15,10 +15,17 @@ export default function Page() {
         type: null,
         price: null,
         description: null,
+        image: null
     })
-    const [wineImage, setWineImage] = useState(null)
 
     const router = useRouter()
+
+    useEffect(() => {
+        if (!(authorizedAddress.find(item => item.toLowerCase() === address?.toLowerCase()))) {
+            router.push('/')
+            return
+        }
+    }, [authorizedAddress, address])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -32,8 +39,12 @@ export default function Page() {
         const file = e.target.files[0]
         const reader = new FileReader();
 
+        const { name } = e.target;
         reader.onloadend = () => {
-            setWineImage(reader.result);
+            setNewWine(prevState => ({
+                ...prevState,
+                [name]: reader.result
+            }));
             // console.log(reader.result)
         };
 
@@ -51,12 +62,11 @@ export default function Page() {
         } else {
             const concatenatedNewWine = {
                 ...newWine,
-                ...{ image: wineImage },
                 ...{ owner_address: address },
                 ...{ uuid: uuidv4() }
             }
             setWines(prevWines => [...prevWines, concatenatedNewWine]);
-            // console.log(concatenatedNewWine)
+            console.log("Concate", concatenatedNewWine)
         }
     }
 

@@ -5,6 +5,11 @@ import React, { createContext, useState } from "react";
 export const AppContext = createContext()
 
 export default function AppContextProvider({ children }) {
+    // Owner's Address
+    const owner = '0x1a930B92C36D3BA43CFcF5Ce5EDca2E75A7c8cDB'
+    const [authorizedAddress, setAuthorizedAddress] = useState([owner, "0x76c294af238210c76F648a66cCF23505E66BD4AC"])
+    const [requestingAuthorization, setRequestingAuthorization] = useState(["0x28C510604bb964E7A01A6C1E0D4B6fE0483f3688", "0xd872D69922F0462b50c38f8Fb70154e67A0A49Dc"])
+
     const [wines, setWines] = useState([
         {
             uuid: '6ab51925-37b4-4031-ac15-d5c0efaa9ea2',
@@ -51,12 +56,15 @@ export default function AppContextProvider({ children }) {
             owner_address: ""
         },
     ])
+    // Connected Address
     const [address, setAddress] = useState(null)
 
-    console.log(uuidv4())
+
+    // console.log(uuidv4())
+    // console.log(authorizedAddress)
     return (
         <AppContext.Provider
-            value={{ wines, setWines, address, setAddress }}
+            value={{ wines, setWines, address, setAddress, owner, authorizedAddress, setAuthorizedAddress, setRequestingAuthorization, requestingAuthorization }}
         >
             {children}
         </AppContext.Provider>

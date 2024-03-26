@@ -1,23 +1,16 @@
 "use client"
 import Link from 'next/link'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AppContext } from '../Context'
 import { usePathname } from 'next/navigation'
 
-const navLinks = [
-    {
-        name: "Home",
-        to: '/'
-    },
-    {
-        name: "Add Wine",
-        to: '/addwine'
-    }
-]
-
 export default function NavBar() {
-    const { setAddress, address } = useContext(AppContext)
+    const { setAddress, address, authorizedAddress, requestingAuthorization, setRequestingAuthorization, owner } = useContext(AppContext)
     const pathname = usePathname()
+
+    useEffect(() => {
+        const finf = authorizedAddress.find(item => item.toLowerCase() != address?.toLowerCase())
+    }, [address])
 
     const connectWallet = () => {
         if (window.ethereum) {
@@ -38,16 +31,46 @@ export default function NavBar() {
         <nav className='p-5 absolute top-0 left-0 w-full'>
             <div className='container mx-auto flex items-center justify-between gap-8'>
                 <div className='flex items-center gap-4'>
-                    {navLinks?.map((item, index) => (
+                    {/* Home */}
+                    <Link
+                        href={'/'}
+                        className='relative group'
+                    >
+                        <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 rounded-full w-0 group-hover:w-full bg-[#B98D58] ${pathname === "/" && 'w-full'}`}></span>
+                        <span className='p-2'>Home</span>
+                    </Link>
+                    {/* Admin */}
+                    {owner?.toLowerCase() === address?.toLowerCase() && (
                         <Link
-                            href={item.to}
-                            key={index}
+                            href={'/admin'}
                             className='relative group'
                         >
-                            <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 rounded-full w-0 group-hover:w-full bg-[#B98D58] ${item.to === pathname && 'w-full'}`}></span>
-                            <span className='p-2'>{item.name}</span>
+                            <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 rounded-full w-0 group-hover:w-full bg-[#B98D58] ${pathname === "/admin" && 'w-full'}`}></span>
+                            <span className='p-2'>Admin</span>
                         </Link>
-                    ))}
+                    )}
+                    {/* Add Wine */}
+                    {authorizedAddress.find(item => item.toLowerCase() === address?.toLowerCase()) && (
+                        <Link
+                            href={'/addwine'}
+                            className='relative group'
+                        >
+                            <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 rounded-full w-0 group-hover:w-full bg-[#B98D58] ${pathname === "/addwine" && 'w-full'}`}></span>
+                            <span className='p-2'>Add Wine</span>
+                        </Link>
+                    )}
+                    {/* Request Authorization */}
+                    {address && !(authorizedAddress.find(item => item.toLowerCase() === address?.toLowerCase())) && (
+                        <button
+                            className='px-2 py-1 rounded border border-white hover:bg-[#F9F8F4] hover:text-black active:scale-[0.98] text-sm disabled:cursor-not-allowed disabled:bg-[#F9F8F4] disabled:text-black'
+                            onClick={() => setRequestingAuthorization(prevArray => [...prevArray, address])}
+                            disabled={requestingAuthorization.find(item => item.toLowerCase() === address?.toLowerCase())}
+                        >
+                            {requestingAuthorization.find(item => item.toLowerCase() === address?.toLowerCase())
+                                ? "Permission Requested"
+                                : "Request For Permission"}
+                        </button>
+                    )}
                 </div>
 
                 <h1 className='text-4xl font-semibold font-serif'>Winery</h1>
