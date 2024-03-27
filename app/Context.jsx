@@ -6,9 +6,10 @@ export const AppContext = createContext()
 
 export default function AppContextProvider({ children }) {
     // Owner's Address
-    const owner = '0x1a930B92C36D3BA43CFcF5Ce5EDca2E75A7c8cDB'
-    const [authorizedAddress, setAuthorizedAddress] = useState([owner, "0x76c294af238210c76F648a66cCF23505E66BD4AC"])
-    const [requestingAuthorization, setRequestingAuthorization] = useState(["0x28C510604bb964E7A01A6C1E0D4B6fE0483f3688", "0xd872D69922F0462b50c38f8Fb70154e67A0A49Dc"])
+    // const owner = '0x1a930B92C36D3BA43CFcF5Ce5EDca2E75A7c8cDB'
+    const owner = '0xc80a71C0A21Bd782f176E06B2Eb8f197f53fE194'
+    const [authorizedAddress, setAuthorizedAddress] = useState([owner, "0x76c294af238210c76F648a66cCF23505E66BD4AC", "0xbaA0075978fD5304AE4222E3E0726f6A5081D550"])
+    const [requestingAuthorization, setRequestingAuthorization] = useState(["0x28C510604bb964E7A01A6C1E0D4B6fE0483f3688", "0xd872D69922F0462b50c38f8Fb70154e67A0A49Dc", "0x601C6F4962F4697831732c0Da481f16A06579c88"])
 
     const [wines, setWines] = useState([
         {
