@@ -1,0 +1,577 @@
+{
+    "compiler": {
+        "version": "0.8.25+commit.b61c2a91"
+    },
+    "address": "0x53c520a02eaa509fe277c52f33891f8a42faf908",
+    "language": "Solidity",
+    "output": {
+        "abi": [
+            {
+                "inputs": [],
+                "stateMutability": "nonpayable",
+                "type": "constructor"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    }
+                ],
+                "name": "OwnerAdded",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "bytes32[]",
+                        "name": "wineIds",
+                        "type": "bytes32[]"
+                    }
+                ],
+                "name": "OwnerAndWinesRemoved",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    }
+                ],
+                "name": "OwnerRemoved",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "bytes32",
+                        "name": "wineId",
+                        "type": "bytes32"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "vintage",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "region",
+                        "type": "string"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "country",
+                        "type": "string"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "area",
+                        "type": "string"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256",
+                        "name": "lotSize",
+                        "type": "uint256"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "website",
+                        "type": "string"
+                    }
+                ],
+                "name": "WineAdded",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": true,
+                        "internalType": "bytes32",
+                        "name": "wineId",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "WineRemoved",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "bytes32[]",
+                        "name": "wineIds",
+                        "type": "bytes32[]"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string[]",
+                        "name": "names",
+                        "type": "string[]"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256[]",
+                        "name": "vintages",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string[]",
+                        "name": "regions",
+                        "type": "string[]"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string[]",
+                        "name": "countries",
+                        "type": "string[]"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string[]",
+                        "name": "areas",
+                        "type": "string[]"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "uint256[]",
+                        "name": "lotSizes",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string[]",
+                        "name": "websites",
+                        "type": "string[]"
+                    }
+                ],
+                "name": "WinesAdded",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": true,
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "bytes32[]",
+                        "name": "wineIds",
+                        "type": "bytes32[]"
+                    }
+                ],
+                "name": "WinesRemoved",
+                "type": "event"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "_owner",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "string[]",
+                        "name": "_names",
+                        "type": "string[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "_vintages",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "string[]",
+                        "name": "_regions",
+                        "type": "string[]"
+                    },
+                    {
+                        "internalType": "string[]",
+                        "name": "_countries",
+                        "type": "string[]"
+                    },
+                    {
+                        "internalType": "string[]",
+                        "name": "_areas",
+                        "type": "string[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "_lotSizes",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "string[]",
+                        "name": "_websites",
+                        "type": "string[]"
+                    }
+                ],
+                "name": "addMultipleWinesByOwner",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "_owner",
+                        "type": "address"
+                    }
+                ],
+                "name": "addOwner",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "_owner",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_name",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "_vintage",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_region",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_country",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_area",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "_lotSize",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_website",
+                        "type": "string"
+                    }
+                ],
+                "name": "addWineByOwner",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "_owner",
+                        "type": "address"
+                    }
+                ],
+                "name": "getAllWinesByOwner",
+                "outputs": [
+                    {
+                        "components": [
+                            {
+                                "internalType": "string",
+                                "name": "name",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "vintage",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "region",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "country",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "area",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "lotSize",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "website",
+                                "type": "string"
+                            }
+                        ],
+                        "internalType": "struct WineRegistry.Wine[]",
+                        "name": "",
+                        "type": "tuple[]"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "getOwners",
+                "outputs": [
+                    {
+                        "internalType": "address[]",
+                        "name": "",
+                        "type": "address[]"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "_owner",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "bytes32",
+                        "name": "_wineId",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "getWineById",
+                "outputs": [
+                    {
+                        "components": [
+                            {
+                                "internalType": "string",
+                                "name": "name",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "vintage",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "region",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "country",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "area",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "lotSize",
+                                "type": "uint256"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "website",
+                                "type": "string"
+                            }
+                        ],
+                        "internalType": "struct WineRegistry.Wine",
+                        "name": "",
+                        "type": "tuple"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "_owner",
+                        "type": "address"
+                    }
+                ],
+                "name": "isOwner",
+                "outputs": [
+                    {
+                        "internalType": "bool",
+                        "name": "",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "owner",
+                "outputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "_owner",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "bytes32[]",
+                        "name": "_wineIds",
+                        "type": "bytes32[]"
+                    }
+                ],
+                "name": "removeMultipleWinesByOwner",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "_owner",
+                        "type": "address"
+                    }
+                ],
+                "name": "removeOwner",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "_owner",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "bytes32",
+                        "name": "_wineId",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "removeWineByOwner",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            }
+        ],
+        "devdoc": {
+            "kind": "dev",
+            "methods": {},
+            "version": 1
+        },
+        "userdoc": {
+            "kind": "user",
+            "methods": {},
+            "version": 1
+        }
+    },
+    "settings": {
+        "compilationTarget": {
+            "contracts/winery.sol": "WineRegistry"
+        },
+        "evmVersion": "cancun",
+        "libraries": {},
+        "metadata": {
+            "bytecodeHash": "ipfs"
+        },
+        "optimizer": {
+            "enabled": false,
+            "runs": 200
+        },
+        "remappings": []
+    },
+    "sources": {
+        "contracts/winery.sol": {
+            "keccak256": "0x892246ccb8abb3b7e30205114b3066418a61d7486c3012f6cae8f8848f920481",
+            "license": "MIT",
+            "urls": [
+                "bzz-raw://3cdbd93e0574eabe140ea0d69bac9326070fd635343a462343651492d5cfd659",
+                "dweb:/ipfs/QmNTWBWVi4UtdSJrDNvzC7e6gpD8mcBC7hjh7oNVxcqmA1"
+            ]
+        }
+    },
+    "version": 1
+}
