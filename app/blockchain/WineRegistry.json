@@ -1,9 +1,9 @@
 {
+    "address": "0xacc6f3781bb00824d60a59f2b966d5e074a1eac6",
     "compiler": {
         "version": "0.8.25+commit.b61c2a91"
     },
     "language": "Solidity",
-    "address": "0xb73eabbc06a0a9d1c9f0899ee5d235d744cba97d",
     "output": {
         "abi": [
             {
@@ -593,7 +593,7 @@
     },
     "settings": {
         "compilationTarget": {
-            "contracts/WineRegistry.sol": "WineRegistry"
+            "WineRegistry.sol": "WineRegistry"
         },
         "evmVersion": "cancun",
         "libraries": {},
@@ -631,7 +631,7 @@
                 "dweb:/ipfs/QmVBEei6aTnvYNZp2CHYVNKyZS4q1KkjANfY39WVXZXVoT"
             ]
         },
-        "contracts/WineRegistry.sol": {
+        "WineRegistry.sol": {
             "keccak256": "0xaf738a2fc0e05fc76c0bdf1a6705cf0d4a1db7d800140b80c1421d144530fdd5",
             "license": "MIT",
             "urls": [
