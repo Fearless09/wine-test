@@ -150,12 +150,14 @@ contract WineRegistry {
         string[] storage wineIds = wineIdsByOwner[_owner];
         for (uint i = 0; i < wineIds.length; i++) {
             if (keccak256(bytes(wineIds[i])) == keccak256(bytes(_wineId))) {
-            // if (wineIds[i] == _wineId) {
-                wineIds[i] = wineIds[wineIds.length - 1];
-                wineIds.pop();
-                break;
+                if (wineIds[i] == _wineId) {
+                    wineIds[i] = wineIds[wineIds.length - 1];
+                    wineIds.pop();
+                    break;
+                }
             }
         }
+        
 
         emit WineRemoved(_owner, _wineId);
     }
@@ -171,10 +173,11 @@ contract WineRegistry {
             string[] storage wineIds = wineIdsByOwner[_owner];
             for (uint j = 0; j < wineIds.length; j++) {
                 if (keccak256(bytes(wineIds[j])) == keccak256(bytes(wineId))) {
-                // if (wineIds[j] == wineId) {
-                    wineIds[j] = wineIds[wineIds.length - 1];
-                    wineIds.pop();
-                    break;
+                    if (wineIds[j] == wineId) {
+                        wineIds[j] = wineIds[wineIds.length - 1];
+                        wineIds.pop();
+                        break;
+                    }
                 }
             }
         }

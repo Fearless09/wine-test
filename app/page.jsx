@@ -74,12 +74,12 @@ export default function Home() {
   //======================
 
     //7. get all wines by owner
-    /* const wines = await getAllWinesByOwner(
+    const wines = await getAllWinesByOwner(
       '0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3'
     ).catch(error => console.error(error))
     //get values of type BigNumber like lotsize from blockchain response.
     //Note that we got multiple wines
-    if (wines) console.log(getStringOfBigNumber(wines[0][3])) */
+    if (wines) console.log(getStringOfBigNumber(wines[0][3]))
 
     //================
 
