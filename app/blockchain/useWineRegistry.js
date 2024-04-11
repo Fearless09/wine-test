@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import WineRegistryContract from './WineRegistry.json';
 
 const useWineRegistry = () => {
@@ -42,8 +42,8 @@ const useWineRegistry = () => {
     const addOwner = async (ownerAddress) => {
         try {
             const tx = await contract.addOwner(ownerAddress);
-            await tx.wait();
-            console.log('Owner added successfully');
+            const res = await tx.wait();
+            console.log('Owner added successfully', res);
         } catch (error) {
             console.error('Error adding owner:', error);
         }
@@ -52,8 +52,8 @@ const useWineRegistry = () => {
     const removeOwner = async (ownerAddress) => {
         try {
             const tx = await contract.removeOwner(ownerAddress);
-            await tx.wait();
-            console.log('Owner removed successfully');
+            const res = await tx.wait();
+            console.log('Owner removed successfully', res);
         } catch (error) {
             console.error('Error removing owner:', error);
         }
@@ -81,18 +81,36 @@ const useWineRegistry = () => {
                 lotSize,
                 website
             );
-            await tx.wait();
-            console.log('Wine added successfully');
+            const res = await tx.wait();
+            console.log('Wine added successfully', res);
         } catch (error) {
             console.error('Error adding wine:', error);
         }
     };
 
-    const addMultipleWinesByOwner = async (ownerAddress, wines) => {
+    const addMultipleWinesByOwner = async (
+        ownerAddress,
+        names,
+        vintages,
+        regions,
+        countries,
+        areas,
+        lotSizes,
+        websites
+    ) => {
         try {
-            const tx = await contract.addMultipleWinesByOwner(ownerAddress, wines);
-            await tx.wait();
-            console.log('Multiple wines added successfully');
+            const tx = await contract.addMultipleWinesByOwner(
+                ownerAddress,
+                names,
+                vintages,
+                regions,
+                countries,
+                areas,
+                lotSizes,
+                websites
+            );
+            const res = await tx.wait();
+            console.log('Multiple wines added successfully', res);
         } catch (error) {
             console.error('Error adding multiple wines:', error);
         }
@@ -101,19 +119,25 @@ const useWineRegistry = () => {
     const removeWineById = async (ownerAddress, wineIndex) => {
         try {
             const tx = await contract.removeWineByOwner(ownerAddress, wineIndex);
-            await tx.wait();
-            console.log('Wine removed successfully');
+            const res = await tx.wait();
+            console.log('Wine removed successfully', res);
         } catch (error) {
             console.error('Error removing wine:', error);
         }
     };
 
 
-    const removeMultipleWinesByOwner = async (ownerAddress, wineIds) => {
+    const removeMultipleWinesByOwner = async (
+        ownerAddress,
+        wineIds
+    ) => {
         try {
-            const tx = await contract.removeMultipleWinesByOwner(ownerAddress, wineIds);
-            await tx.wait();
-            console.log('Multiple wines removed successfully');
+            const tx = await contract.removeMultipleWinesByOwner(
+                ownerAddress,
+                wineIds
+            );
+            const res = await tx.wait();
+            console.log('Multiple wines removed successfully', res);
         } catch (error) {
             console.error('Error removing multiple wines:', error);
         }
@@ -135,7 +159,7 @@ const useWineRegistry = () => {
     const getAllWinesByOwner = async (ownerAddress) => {
         try {
             const wines = await contract.getAllWinesByOwner(ownerAddress);
-            console.log('Wines:', wines);
+            console.log('Wines:', wines)
             return wines;
         } catch (error) {
             console.error('Error getting wines:', error);
@@ -155,8 +179,24 @@ const useWineRegistry = () => {
         }
     };
 
+    const getStringOfBigNumber = (bignum) => BigNumber.from(bignum).toString();
 
-    return { provider, contract, addOwner, removeOwner, getAllOwners, addWine, removeWineById, getAllWinesByOwner, getWineById, getWineById, removeMultipleWinesByOwner };
+
+
+    return {
+        provider,
+        contract,
+        addOwner,
+        removeOwner,
+        getAllOwners,
+        addWine,
+        removeWineById,
+        getAllWinesByOwner,
+        getWineById,
+        addMultipleWinesByOwner,
+        removeMultipleWinesByOwner,
+        getStringOfBigNumber
+    };
 };
 
 export default useWineRegistry;

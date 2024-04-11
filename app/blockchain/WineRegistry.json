@@ -2,14 +2,30 @@
     "compiler": {
         "version": "0.8.25+commit.b61c2a91"
     },
-    "address": "0x53c520a02eaa509fe277c52f33891f8a42faf908",
     "language": "Solidity",
+    "address": "0xb73eabbc06a0a9d1c9f0899ee5d235d744cba97d",
     "output": {
         "abi": [
             {
                 "inputs": [],
                 "stateMutability": "nonpayable",
                 "type": "constructor"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "value",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "length",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "StringsInsufficientHexLength",
+                "type": "error"
             },
             {
                 "anonymous": false,
@@ -35,9 +51,9 @@
                     },
                     {
                         "indexed": false,
-                        "internalType": "bytes32[]",
+                        "internalType": "string[]",
                         "name": "wineIds",
-                        "type": "bytes32[]"
+                        "type": "string[]"
                     }
                 ],
                 "name": "OwnerAndWinesRemoved",
@@ -67,9 +83,9 @@
                     },
                     {
                         "indexed": true,
-                        "internalType": "bytes32",
+                        "internalType": "string",
                         "name": "wineId",
-                        "type": "bytes32"
+                        "type": "string"
                     },
                     {
                         "indexed": false,
@@ -128,9 +144,9 @@
                     },
                     {
                         "indexed": true,
-                        "internalType": "bytes32",
+                        "internalType": "string",
                         "name": "wineId",
-                        "type": "bytes32"
+                        "type": "string"
                     }
                 ],
                 "name": "WineRemoved",
@@ -147,9 +163,9 @@
                     },
                     {
                         "indexed": false,
-                        "internalType": "bytes32[]",
+                        "internalType": "string[]",
                         "name": "wineIds",
-                        "type": "bytes32[]"
+                        "type": "string[]"
                     },
                     {
                         "indexed": false,
@@ -208,9 +224,9 @@
                     },
                     {
                         "indexed": false,
-                        "internalType": "bytes32[]",
+                        "internalType": "string[]",
                         "name": "wineIds",
-                        "type": "bytes32[]"
+                        "type": "string[]"
                     }
                 ],
                 "name": "WinesRemoved",
@@ -338,6 +354,16 @@
                     {
                         "components": [
                             {
+                                "internalType": "address",
+                                "name": "owner",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "id",
+                                "type": "string"
+                            },
+                            {
                                 "internalType": "string",
                                 "name": "name",
                                 "type": "string"
@@ -402,15 +428,25 @@
                         "type": "address"
                     },
                     {
-                        "internalType": "bytes32",
+                        "internalType": "string",
                         "name": "_wineId",
-                        "type": "bytes32"
+                        "type": "string"
                     }
                 ],
                 "name": "getWineById",
                 "outputs": [
                     {
                         "components": [
+                            {
+                                "internalType": "address",
+                                "name": "owner",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "id",
+                                "type": "string"
+                            },
                             {
                                 "internalType": "string",
                                 "name": "name",
@@ -495,9 +531,9 @@
                         "type": "address"
                     },
                     {
-                        "internalType": "bytes32[]",
+                        "internalType": "string[]",
                         "name": "_wineIds",
-                        "type": "bytes32[]"
+                        "type": "string[]"
                     }
                 ],
                 "name": "removeMultipleWinesByOwner",
@@ -526,9 +562,9 @@
                         "type": "address"
                     },
                     {
-                        "internalType": "bytes32",
+                        "internalType": "string",
                         "name": "_wineId",
-                        "type": "bytes32"
+                        "type": "string"
                     }
                 ],
                 "name": "removeWineByOwner",
@@ -538,6 +574,13 @@
             }
         ],
         "devdoc": {
+            "errors": {
+                "StringsInsufficientHexLength(uint256,uint256)": [
+                    {
+                        "details": "The `value` string doesn't fit in the specified `length`."
+                    }
+                ]
+            },
             "kind": "dev",
             "methods": {},
             "version": 1
@@ -550,7 +593,7 @@
     },
     "settings": {
         "compilationTarget": {
-            "contracts/winery.sol": "WineRegistry"
+            "contracts/WineRegistry.sol": "WineRegistry"
         },
         "evmVersion": "cancun",
         "libraries": {},
@@ -564,12 +607,36 @@
         "remappings": []
     },
     "sources": {
-        "contracts/winery.sol": {
-            "keccak256": "0x892246ccb8abb3b7e30205114b3066418a61d7486c3012f6cae8f8848f920481",
+        "@openzeppelin/contracts/utils/Strings.sol": {
+            "keccak256": "0x55f102ea785d8399c0e58d1108e2d289506dde18abc6db1b7f68c1f9f9bc5792",
             "license": "MIT",
             "urls": [
-                "bzz-raw://3cdbd93e0574eabe140ea0d69bac9326070fd635343a462343651492d5cfd659",
-                "dweb:/ipfs/QmNTWBWVi4UtdSJrDNvzC7e6gpD8mcBC7hjh7oNVxcqmA1"
+                "bzz-raw://6e52e0a7765c943ef14e5bcf11e46e6139fa044be564881378349236bf2e3453",
+                "dweb:/ipfs/QmZEeeXoFPW47amyP35gfzomF9DixqqTEPwzBakv6cZw6i"
+            ]
+        },
+        "@openzeppelin/contracts/utils/math/Math.sol": {
+            "keccak256": "0x005ec64c6313f0555d59e278f9a7a5ab2db5bdc72a027f255a37c327af1ec02d",
+            "license": "MIT",
+            "urls": [
+                "bzz-raw://4ece9f0b9c8daca08c76b6b5405a6446b6f73b3a15fab7ff56e296cbd4a2c875",
+                "dweb:/ipfs/QmQyRpyPRL5SQuAgj6SHmbir3foX65FJjbVTTQrA2EFg6L"
+            ]
+        },
+        "@openzeppelin/contracts/utils/math/SignedMath.sol": {
+            "keccak256": "0x5f7e4076e175393767754387c962926577f1660dd9b810187b9002407656be72",
+            "license": "MIT",
+            "urls": [
+                "bzz-raw://7d533a1c97cd43a57cd9c465f7ee8dd0e39ae93a8fb8ff8e5303a356b081cdcc",
+                "dweb:/ipfs/QmVBEei6aTnvYNZp2CHYVNKyZS4q1KkjANfY39WVXZXVoT"
+            ]
+        },
+        "contracts/WineRegistry.sol": {
+            "keccak256": "0xaf738a2fc0e05fc76c0bdf1a6705cf0d4a1db7d800140b80c1421d144530fdd5",
+            "license": "MIT",
+            "urls": [
+                "bzz-raw://36d9b882fb0f231c3e1d3ab764f9f4fdaf9252a257141d4ab72a2f6c3039a272",
+                "dweb:/ipfs/QmfXVyUuDT3QXusGeNfyvYzajhakmaJFmsPV6g6xYfB1N7"
             ]
         }
     },
