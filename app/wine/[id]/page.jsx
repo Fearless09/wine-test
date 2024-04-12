@@ -5,22 +5,28 @@ import NavBar from '@/app/components/NavBar'
 import { AppContext } from '@/app/Context'
 import { BackSVG, DeleteSVG } from '@/app/components/Svgs'
 import Image from 'next/image'
+import { toast } from 'react-toastify'
 
 export default function Page({ params }) {
     const { id } = params
-    const { wines, setWines, address, contract, removeWineById } = useContext(AppContext)
+    const { wines, setWines, address, contract, removeWineById, loading, setLoading } = useContext(AppContext)
     const [wine, setWine] = useState(null)
     const router = useRouter()
     const currentURL = window.location.href
 
     const getWineById = async (ownerAddress, wineIndex) => {
+        setLoading(true)
+        toast("Geting Wine Information")
         try {
             const block_wine = await contract.getWineById(ownerAddress, wineIndex);
-            console.log('Wine:', block_wine);
+            // console.log('Wine:', block_wine);
             setWine(block_wine)
+            setLoading(false)
             return block_wine;
         } catch (error) {
-            console.error('Error getting wine:', error);
+            // console.error('Error getting wine:', error);
+            setLoading(false)
+            toast.error("Error getting wine information")
             return null;
         }
     };

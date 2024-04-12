@@ -61,11 +61,11 @@ export default function Page() {
         addWine(
             address,
             newWine.name,
-            Number(newWine.vintage),
+            BigInt(newWine.vintage),
             newWine.region,
             newWine.country,
             newWine.area,
-            Number(newWine.lotSize),
+            BigInt(newWine.lotSize),
             newWine.website
         )
 
@@ -116,7 +116,7 @@ export default function Page() {
                             </label>
                             <input
                                 type="number"
-                                name='year'
+                                name='vintage'
                                 className='py-3 px-2 rounded-lg border bg-[#B98D58]/15'
                                 onChange={handleChange}
                                 value={newWine.vintage}
@@ -144,7 +144,7 @@ export default function Page() {
                             </label>
                             <input
                                 type="text"
-                                name='type'
+                                name='region'
                                 className='py-3 px-2 rounded-lg border bg-[#B98D58]/15'
                                 onChange={handleChange}
                                 value={newWine.region}
@@ -158,7 +158,7 @@ export default function Page() {
                             </label>
                             <input
                                 type="text"
-                                name='price'
+                                name='area'
                                 className='py-3 px-2 rounded-lg border bg-[#B98D58]/15'
                                 onChange={handleChange}
                                 value={newWine.area}
@@ -172,7 +172,7 @@ export default function Page() {
                             </label>
                             <input
                                 type="number"
-                                name='price'
+                                name='lotSize'
                                 className='py-3 px-2 rounded-lg border bg-[#B98D58]/15'
                                 onChange={handleChange}
                                 value={newWine.lotSize}
@@ -186,7 +186,7 @@ export default function Page() {
                             </label>
                             <input
                                 type="text"
-                                name='price'
+                                name='website'
                                 className='py-3 px-2 rounded-lg border bg-[#B98D58]/15'
                                 onChange={handleChange}
                                 value={newWine.website}

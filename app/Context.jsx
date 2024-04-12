@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import React, { createContext, useState, useEffect } from "react";
 import { BigNumber, ethers } from 'ethers';
 import WineRegistryContract from './blockchain/WineRegistry.json';
+import { toast } from 'react-toastify';
 
 export const AppContext = createContext()
 
@@ -33,7 +34,8 @@ export default function AppContextProvider({ children }) {
                         setLoading(false)
                     })
             } catch (error) {
-                console.error('User denied account access');
+                // console.error('User denied account access');
+                toast.error('User denied account access')
                 setLoading(false)
             }
             const providerInstance = new ethers.providers.Web3Provider(window.ethereum);
@@ -41,7 +43,8 @@ export default function AppContextProvider({ children }) {
         } else {
             // Non-dapp browsers
             setLoading(false)
-            console.error('Non-Ethereum browser detected. You should consider trying MetaMask!');
+            // console.error('Non-Ethereum browser detected. You should consider trying MetaMask!');
+            toast.error('Non-Ethereum browser detected. You should consider trying MetaMask!')
         }
     };
 
@@ -65,6 +68,7 @@ export default function AppContextProvider({ children }) {
 
     const getAllWinesByOwner = async (ownerAddress) => {
         setLoading(true)
+        toast("Getting wines")
         try {
             const wine = await contract.getAllWinesByOwner(ownerAddress);
             setWines(wine)
@@ -72,8 +76,9 @@ export default function AppContextProvider({ children }) {
             // console.log('Wines:', wine)
             return wine;
         } catch (error) {
-            console.error('Error getting wines:', error);
+            // console.error('Error getting wines:', error);
             setLoading(false)
+            toast.error("Error getting wines")
             return [];
         }
     };
@@ -88,7 +93,6 @@ export default function AppContextProvider({ children }) {
         lotSize,
         website
     ) => {
-        console.log("Adding Wine...")
         setLoading(true)
         try {
             const tx = await contract.addWineByOwner(
@@ -104,9 +108,11 @@ export default function AppContextProvider({ children }) {
             const res = await tx.wait();
             getAllWinesByOwner(address)
             setLoading(false)
-            console.log('Wine added successfully', res);
+            toast.success("Wine added successfully")
+            // console.log('Wine added successfully', res);
         } catch (error) {
-            console.error('Error adding wine:', error);
+            // console.error('Error adding wine:', error);
+            toast.error("Error adding wine")
             setLoading(false)
         }
     };
@@ -116,28 +122,30 @@ export default function AppContextProvider({ children }) {
         try {
             const tx = await contract.removeWineByOwner(ownerAddress, wineIndex);
             const res = await tx.wait();
-            console.log('Wine removed successfully', res);
+            // console.log('Wine removed successfully', res);
             getAllWinesByOwner(address)
+            toast.success("Wine removed successfully")
             setLoading(false)
         } catch (error) {
-            console.error('Error removing wine:', error);
+            // console.error('Error removing wine:', error);
+            toast.error("Error removing wine")
             setLoading(false)
         }
     };
 
-    const getWineById = async (ownerAddress, wineIndex) => {
-        setLoading(true)
-        try {
-            const wine = await contract.getWineById(ownerAddress, wineIndex);
-            console.log('Wine:', wine);
-            setLoading(false)
-            return wine;
-        } catch (error) {
-            console.error('Error getting wine:', error);
-            setLoading(false)
-            return null;
-        }
-    };
+    // const getWineById = async (ownerAddress, wineIndex) => {
+    //     setLoading(true)
+    //     try {
+    //         const wine = await contract.getWineById(ownerAddress, wineIndex);
+    //         console.log('Wine:', wine);
+    //         setLoading(false)
+    //         return wine;
+    //     } catch (error) {
+    //         console.error('Error getting wine:', error);
+    //         setLoading(false)
+    //         return null;
+    //     }
+    // };
 
     const getOwner = async () => {
         setLoading(true)
@@ -148,7 +156,7 @@ export default function AppContextProvider({ children }) {
             setLoading(false)
             return block_owner;
         } catch (error) {
-            console.error('Error getting owner:', error);
+            // console.error('Error getting owner:', error);
             setLoading(false)
             return [];
         }
@@ -158,28 +166,30 @@ export default function AppContextProvider({ children }) {
         setLoading(true)
         try {
             const owners = await contract.getOwners();
-            console.log('Owners:', owners);
+            // console.log('Owners:', owners);
             setAuthorizedAddress(owners)
             setLoading(false)
             return owners;
         } catch (error) {
-            console.error('Error getting owners:', error);
+            // console.error('Error getting owners:', error);
             setLoading(false)
             return [];
         }
     };
 
     const addOwner = async (ownerAddress) => {
-        console.log("Adding ", ownerAddress)
+        // console.log("Adding ", ownerAddress)
         setLoading(true)
         try {
             const tx = await contract.addOwner(ownerAddress);
             const res = await tx.wait();
             getAllOwners()
             setLoading(false)
-            console.log('Owner added successfully', res);
+            toast.success("Address added successfully")
+            // console.log('Owner added successfully', res);
         } catch (error) {
-            console.error('Error adding owner:', error);
+            // console.error('Error adding owner:', error);
+            toast.error("Error adding address")
             setLoading(false)
         }
     };
@@ -192,9 +202,11 @@ export default function AppContextProvider({ children }) {
             const res = await tx.wait();
             getAllOwners()
             setLoading(false)
-            console.log('Owner removed successfully', res);
+            // console.log('Owner removed successfully', res);
+            toast.success("Address removed successfully")
         } catch (error) {
-            console.error('Error removing owner:', error);
+            // console.error('Error removing owner:', error);
+            toast.error("Error removing address")
             setLoading(false)
         }
     };
@@ -210,7 +222,7 @@ export default function AppContextProvider({ children }) {
 
     return (
         <AppContext.Provider
-            value={{ init, contract, addOwner, removeOwner, addWine, removeWineById, wines, setWines, address, setAddress, owner, authorizedAddress, setAuthorizedAddress, setRequestingAuthorization, requestingAuthorization, loading }}
+            value={{ init, contract, addOwner, removeOwner, addWine, removeWineById, wines, setWines, address, setAddress, owner, authorizedAddress, setAuthorizedAddress, setRequestingAuthorization, requestingAuthorization, loading, setLoading }}
         >
             {children}
         </AppContext.Provider>
