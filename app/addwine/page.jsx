@@ -4,28 +4,30 @@ import NavBar from '../components/NavBar'
 import { BackSVG } from '../components/Svgs'
 import { useRouter } from 'next/navigation'
 import { AppContext } from '../Context'
-import { v4 as uuidv4 } from 'uuid';
 
 export default function Page() {
-    const { setWines, address, authorizedAddress } = useContext(AppContext)
+    const { addWine, address, authorizedAddress, contract } = useContext(AppContext)
     const [newWine, setNewWine] = useState({
         name: null,
-        year: null,
+        vintage: null,
         country: null,
-        type: null,
-        price: null,
-        description: null,
-        image: null
+        region: null,
+        area: null,
+        lotSize: null,
+        website: null,
+        // image: null
     })
 
     const router = useRouter()
 
     useEffect(() => {
-        if (!(authorizedAddress.find(item => item.toLowerCase() === address?.toLowerCase()))) {
-            router.push('/')
-            return
+        if (contract && address && authorizedAddress) {
+            if (!(authorizedAddress?.find(item => item.toLowerCase() === address?.toLowerCase()))) {
+                router.push('/')
+                return
+            }
         }
-    }, [authorizedAddress, address])
+    }, [contract, authorizedAddress, address])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -35,39 +37,38 @@ export default function Page() {
         }));
     };
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0]
-        const reader = new FileReader();
+    // const handleImageChange = (e) => {
+    //     const file = e.target.files[0]
+    //     const reader = new FileReader();
 
-        const { name } = e.target;
-        reader.onloadend = () => {
-            setNewWine(prevState => ({
-                ...prevState,
-                [name]: reader.result
-            }));
-            // console.log(reader.result)
-        };
+    //     const { name } = e.target;
+    //     reader.onloadend = () => {
+    //         setNewWine(prevState => ({
+    //             ...prevState,
+    //             [name]: reader.result
+    //         }));
+    //         // console.log(reader.result)
+    //     };
 
-        if (file) {
-            reader.readAsDataURL(file);
-        }
-    }
+    //     if (file) {
+    //         reader.readAsDataURL(file);
+    //     }
+    // }
 
-    const addWine = (e) => {
+    const addWineFunc = (e) => {
         e.preventDefault()
 
-        if ((address === null) || (address === undefined)) {
-            alert('Connect your wallect before you can add wine')
-            return
-        } else {
-            const concatenatedNewWine = {
-                ...newWine,
-                ...{ owner_address: address },
-                ...{ uuid: uuidv4() }
-            }
-            setWines(prevWines => [...prevWines, concatenatedNewWine]);
-            console.log("Concate", concatenatedNewWine)
-        }
+        addWine(
+            address,
+            newWine.name,
+            Number(newWine.vintage),
+            newWine.region,
+            newWine.country,
+            newWine.area,
+            Number(newWine.lotSize),
+            newWine.website
+        )
+
     }
 
     return (
@@ -91,7 +92,7 @@ export default function Page() {
                 <h1 className='mt-20 text-center font-semibold font-serif text-5xl'>
                     Add Your Wine
                 </h1>
-                <form onSubmit={addWine}>
+                <form onSubmit={addWineFunc}>
                     {/* Input Field */}
                     <div className='mt-8 md:grid grid-cols-2 space-y-8 md:space-y-0 gap-x-5 gap-y-8'>
                         {/* Name */}
@@ -111,14 +112,14 @@ export default function Page() {
                         {/* Year */}
                         <div className='flex flex-col gap-2'>
                             <label htmlFor="year" className='px-1'>
-                                Year:
+                                Vintage:
                             </label>
                             <input
-                                type="text"
+                                type="number"
                                 name='year'
                                 className='py-3 px-2 rounded-lg border bg-[#B98D58]/15'
                                 onChange={handleChange}
-                                value={newWine.year}
+                                value={newWine.vintage}
                                 required
                             />
                         </div>
@@ -139,33 +140,61 @@ export default function Page() {
                         {/* Type */}
                         <div className='flex flex-col gap-2'>
                             <label htmlFor="type" className='px-1'>
-                                Type:
+                                Region:
                             </label>
                             <input
                                 type="text"
                                 name='type'
                                 className='py-3 px-2 rounded-lg border bg-[#B98D58]/15'
                                 onChange={handleChange}
-                                value={newWine.type}
+                                value={newWine.region}
                                 required
                             />
                         </div>
                         {/* Price */}
                         <div className='flex flex-col gap-2'>
                             <label htmlFor="price" className='px-1'>
-                                Price:
+                                Area:
                             </label>
                             <input
                                 type="text"
                                 name='price'
                                 className='py-3 px-2 rounded-lg border bg-[#B98D58]/15'
                                 onChange={handleChange}
-                                value={newWine.price}
+                                value={newWine.area}
+                                required
+                            />
+                        </div>
+                        {/*  */}
+                        <div className='flex flex-col gap-2'>
+                            <label htmlFor="price" className='px-1'>
+                                Lot Size:
+                            </label>
+                            <input
+                                type="number"
+                                name='price'
+                                className='py-3 px-2 rounded-lg border bg-[#B98D58]/15'
+                                onChange={handleChange}
+                                value={newWine.lotSize}
+                                required
+                            />
+                        </div>
+                        {/*  */}
+                        <div className='flex flex-col gap-2'>
+                            <label htmlFor="price" className='px-1'>
+                                Website:
+                            </label>
+                            <input
+                                type="text"
+                                name='price'
+                                className='py-3 px-2 rounded-lg border bg-[#B98D58]/15'
+                                onChange={handleChange}
+                                value={newWine.website}
                                 required
                             />
                         </div>
                         {/* Image */}
-                        <div className='flex flex-col gap-2'>
+                        {/* <div className='flex flex-col gap-2'>
                             <label htmlFor="image" className='px-1'>
                                 Image:
                             </label>
@@ -176,9 +205,9 @@ export default function Page() {
                                 onChange={handleImageChange}
                                 required
                             />
-                        </div>
+                        </div> */}
                         {/* Description */}
-                        <div className='col-span-2 flex flex-col gap-2'>
+                        {/* <div className='col-span-2 flex flex-col gap-2'>
                             <label htmlFor="description" className='px-1'>
                                 Description:
                             </label>
@@ -191,7 +220,7 @@ export default function Page() {
                                 value={newWine.description}
                                 required
                             ></textarea>
-                        </div>
+                        </div> */}
                     </div>
                     <button
                         className='mt-11 w-full p-4 rounded-lg bg-[#B98D58] text-white font-semibold text-lg active:scale-[0.98]'

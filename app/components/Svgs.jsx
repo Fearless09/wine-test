@@ -46,3 +46,21 @@ export const BackSVG = () => (
         <path d="M14.389 7.956v4.374l1.056.01c7.335.071 11.466 3.333 12.543 9.944-4.029-4.661-8.675-4.663-12.532-4.664h-1.067v4.337l-9.884-7.001zm1.067-2.063L2.661 14.956l12.795 9.063v-5.332c5.121.002 9.869.26 13.884 7.42 0-4.547-.751-14.706-13.884-14.833z" />
     </svg>
 );
+
+export const LoadingSVG = ({ size, color }) => (
+    <svg
+        width={size || 800}
+        height={size || 800}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="animate-spin"
+    >
+        <path
+            d="M12 1v4m7.425 13.925-2.829-2.829M22.5 11.5h-4M12 18v4M7.404 6.904 4.575 4.075M5.5 11.5h-4m5.904 4.596-2.829 2.829"
+            stroke={color || "#1C1C1C"}
+            strokeWidth={1.7}
+            strokeLinecap="round"
+        />
+    </svg>
+);

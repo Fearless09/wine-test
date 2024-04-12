@@ -1,27 +1,12 @@
 "use client"
 import Link from 'next/link'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { AppContext } from '../Context'
 import { usePathname } from 'next/navigation'
 
 export default function NavBar() {
-    const { setAddress, address, authorizedAddress, requestingAuthorization, setRequestingAuthorization, owner } = useContext(AppContext)
+    const { init, address, authorizedAddress, requestingAuthorization, setRequestingAuthorization, owner } = useContext(AppContext)
     const pathname = usePathname()
-
-    useEffect(() => {
-        const finf = authorizedAddress.find(item => item.toLowerCase() != address?.toLowerCase())
-    }, [address])
-
-    const connectWallet = () => {
-        if (window.ethereum) {
-            window.ethereum.request({ method: 'eth_requestAccounts' })
-                .then(result => {
-                    setAddress(result[0])
-                })
-        } else {
-            console.log('Meta Mask Not Install')
-        }
-    }
 
     return (
         <nav className='p-5 absolute top-0 left-0 w-full'>
@@ -49,7 +34,7 @@ export default function NavBar() {
                         </Link>
                     )}
                     {/* Add Wine */}
-                    {authorizedAddress.find(item => item.toLowerCase() === address?.toLowerCase()) && (
+                    {authorizedAddress?.find(item => item.toLowerCase() === address?.toLowerCase()) && (
                         <Link
                             href={'/addwine'}
                             className='relative group'
@@ -59,7 +44,7 @@ export default function NavBar() {
                         </Link>
                     )}
                     {/* Request Authorization */}
-                    {address && !(authorizedAddress.find(item => item.toLowerCase() === address?.toLowerCase())) && (
+                    {address && !(authorizedAddress?.find(item => item.toLowerCase() === address?.toLowerCase())) && (
                         <button
                             className='px-2 py-1 rounded border border-white hover:bg-[#F9F8F4] hover:text-black active:scale-[0.98] text-sm disabled:cursor-not-allowed disabled:bg-[#F9F8F4] disabled:text-black'
                             onClick={() => setRequestingAuthorization(prevArray => [...prevArray, address])}
@@ -84,7 +69,7 @@ export default function NavBar() {
                 ) : (
                     <button
                         className='px-4 py-2 rounded border border-white hover:bg-[#F9F8F4] hover:text-black active:scale-[0.98]'
-                        onClick={() => connectWallet()}
+                            onClick={() => init()}
                     >
                         Connect Wallet
                     </button>
