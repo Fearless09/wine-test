@@ -85,10 +85,10 @@ export default function Page() {
                     ))}
                 </ul>
 
-                <h4 className='py-5 mt-20 mb-5 border-b border-[#DEDDD9] text-[#545D5C] text-3xl font-medium font-serif'>
+                {/* <h4 className='py-5 mt-20 mb-5 border-b border-[#DEDDD9] text-[#545D5C] text-3xl font-medium font-serif'>
                     Address Requesting for Authorization
-                </h4>
-                <ul className='flex flex-col gap1'>
+                </h4> */}
+                {/* <ul className='flex flex-col gap1'>
                     {requestingAuthorization?.map((item, index) => (
                         <li
                             className='p-3 odd:bg-[#B98D58]/25 even:bg-[#B98D58]/10 hover:bg-white flex items-center justify-between gap-3'
@@ -114,7 +114,7 @@ export default function Page() {
                             </span>
                         </li>
                     ))}
-                </ul>
+                </ul> */}
 
                 <h4 className='py-5 mt-20 mb-5 border-b border-[#DEDDD9] text-[#545D5C] text-3xl font-medium font-serif'>
                     Add Address
@@ -124,7 +124,7 @@ export default function Page() {
                     onSubmit={onAdd}
                 >
                     <input
-                        className='bg-[#B98D58]/10 border-2 border-[#B98D58]/25 focus-visible:outline-[#B98D58] outline-2 outline-transparent py-3 px-6 rounded-lg w-full max-w-[500px]'
+                        className='bg-[#B98D58]/10 border-2 border-[#B98D58]/25 focus-visible:outline-[#B98D58] outline-2 outline-transparent py-3 px-6 rounded-lg w-full max-w-[550px]'
                         type="text"
                         placeholder='Address'
                         value={addAddress}

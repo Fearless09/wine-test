@@ -32,6 +32,7 @@ export default function AppContextProvider({ children }) {
                     .then(result => {
                         setAddress(result[0])
                         setLoading(false)
+                        toast.success("Wallet connected")
                     })
             } catch (error) {
                 // console.error('User denied account access');
