@@ -23,10 +23,6 @@ export default function NavBar() {
         }
     }
 
-    const disconnectWallet = () => {
-        setAddress(null)
-    }
-
     return (
         <nav className='p-5 absolute top-0 left-0 w-full'>
             <div className='container mx-auto flex items-center justify-between gap-8'>
@@ -80,10 +76,10 @@ export default function NavBar() {
 
                 {address ? (
                     <button
-                        className='px-4 py-2 rounded bg-red-700 hover:bg-red-700/75 text-white active:scale-[0.98]'
-                        onClick={() => disconnectWallet()}
+                        className='px-4 py-2 rounded bg-green-700 hover:bg-green-700/75 text-white active:scale-[0.98]'
+                        disabled
                     >
-                        Disconnect Wallet
+                        Wallet Connected
                     </button>
                 ) : (
                     <button

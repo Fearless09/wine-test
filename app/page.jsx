@@ -38,48 +38,49 @@ export default function Home() {
     //3. Get all owners
     getAllOwners()
 
-  //====================
+    //====================
 
-  //4. add wine by owner
-  /* addWine(
-    '0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3',
-    'wine name2',
-    11,
-    'wine region',
-    'wine country',
-    'wine area',
-    110,
-    'wine website'
-  ) */
+    //4. add wine by owner
+    /* addWine(
+      '0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3',
+      'wine name2',
+      11,
+      'wine region',
+      'wine country',
+      'wine area',
+      110,
+      'wine website'
+    ) */
 
-  //=======================
+    //=======================
 
-  //5. remove wine by address and id
-  // removeWineById('0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3', '0xf1412a247f91d0e27ec56d92f70195d30e6777de0f30f633f7f40ba3c4d85b84')
+    //5. remove wine by address and id
+    // removeWineById('0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3', '0xf1412a247f91d0e27ec56d92f70195d30e6777de0f30f633f7f40ba3c4d85b84')
 
-  //========================
+    //========================
 
-  //6. add multiple wines by owner
-  /* addMultipleWinesByOwner(
-    '0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3',
-    ['wine name3', 'wine name4'],
-    [11, 12],
-    ['wine region', 'wine region'],
-    ['wine country', 'wine country'],
-    ['wine area', 'wine area'],
-    [110, 111],
-    ['wine website', 'wine website']
-  ) */
+    //6. add multiple wines by owner
+    /* addMultipleWinesByOwner(
+      '0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3',
+      ['wine name3', 'wine name4'],
+      [11, 12],
+      ['wine region', 'wine region'],
+      ['wine country', 'wine country'],
+      ['wine area', 'wine area'],
+      [110, 111],
+      ['wine website', 'wine website']
+    ) */
 
-  //======================
+    //======================
 
     //7. get all wines by owner
-    const wines = await getAllWinesByOwner(
-      '0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3'
-    ).catch(error => console.error(error))
-    //get values of type BigNumber like lotsize from blockchain response.
-    //Note that we got multiple wines
-    if (wines) console.log(getStringOfBigNumber(wines[0][3]))
+    // const wines = await getAllWinesByOwner(
+    //   '0x1a930B92C36D3BA43CFcF5Ce5EDca2E75A7c8cDB'
+    // ).catch(error => console.error(error))
+    // //get values of type BigNumber like lotsize from blockchain response.
+    // //Note that we got multiple wines
+    // if (wines()) console.log(getStringOfBigNumber(wines[0][3]))
+    // wines()
 
     //================
 
