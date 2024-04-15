@@ -50,7 +50,7 @@ export default function NavBar() {
                             onClick={() => setRequestingAuthorization(prevArray => [...prevArray, address])}
                             disabled={requestingAuthorization.find(item => item.toLowerCase() === address?.toLowerCase())}
                         >
-                            {requestingAuthorization.find(item => item.toLowerCase() === address?.toLowerCase())
+                            {requestingAuthorization && requestingAuthorization.find(item => item.toLowerCase() === address?.toLowerCase())
                                 ? "Permission Requested"
                                 : "Request For Permission"}
                         </button>

@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
-import Products from "./components/Products";
+// import Products from "./components/Products";
 import useWineRegistry from './blockchain/useWineRegistry';
 
 
@@ -36,7 +36,7 @@ export default function Home() {
     //======================
 
     //3. Get all owners
-    getAllOwners()
+    // getAllOwners()
 
     //====================
 
@@ -73,25 +73,27 @@ export default function Home() {
 
     //======================
 
-    //7. get all wines by owner
+    // 7. get all wines by owner
     // const wines = await getAllWinesByOwner(
-    //   '0x1a930B92C36D3BA43CFcF5Ce5EDca2E75A7c8cDB'
+    //   '0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3'
     // ).catch(error => console.error(error))
     // //get values of type BigNumber like lotsize from blockchain response.
     // //Note that we got multiple wines
-    // if (wines()) console.log(getStringOfBigNumber(wines[0][3]))
+    //console.log(getStringOfBigNumber(wines[0][3]))
+    // if (wines) console.log(wines)
     // wines()
 
     //================
 
     //8. get a particular wine by address and id
-    /* const wine = await getWineById(
+    const wine = await getWineById(
       '0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3',
-      '0xc72fd10812db789ab213d7b0114867fc57eec53ad550e7116709144a84c47612'
+      '0x5967d1b6e95f2350395f643f5be97eae726bd40febbc98ad6f2f1e7321e7ddfe'
     ).catch(error => console.error(error))
     //get values of type BigNumber like lotsize from blockchain response.
     //Note that we got a single wine
-    if (wine) console.log(getStringOfBigNumber(wine[3])) */
+    // if (wine) console.log(getStringOfBigNumber(wine[3]))
+    if (wine) console.log(wine)
 
     //====================
 
@@ -128,7 +130,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <Products />
+      {/* <Products /> */}
       {provider && contract && (
         <>
           <input

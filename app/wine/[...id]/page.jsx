@@ -1,25 +1,31 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
+import { BigNumber, ethers } from 'ethers';
+import Image from 'next/image'
+import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
+
 import NavBar from '@/app/components/NavBar'
 import { AppContext } from '@/app/Context'
 import { BackSVG, DeleteSVG } from '@/app/components/Svgs'
-import Image from 'next/image'
-import { toast } from 'react-toastify'
+import WineRegistryContract from '../../blockchain/WineRegistry.json';
 
 export default function Page({ params }) {
-    const { id } = params
-    const { wines, setWines, address, contract, removeWineById, loading, setLoading } = useContext(AppContext)
-    const [wine, setWine] = useState(null)
     const router = useRouter()
+    const { contract, removeWineById, address, loading, setLoading } = useContext(AppContext)
+
+    const { id } = params
+    console.log(id)
+    const [wine, setWine] = useState([])
     const currentURL = window.location.href
+    console.log(currentURL)
 
     const getWineById = async (ownerAddress, wineIndex) => {
         setLoading(true)
         toast("Geting Wine Information")
         try {
             const block_wine = await contract.getWineById(ownerAddress, wineIndex);
-            // console.log('Wine:', block_wine);
+            console.log('Wine:', block_wine);
             setWine(block_wine)
             setLoading(false)
             return block_wine;
@@ -31,18 +37,48 @@ export default function Page({ params }) {
         }
     };
 
+    /* const getContract = async () => {
+        const provider = new ethers.providers.JsonRpcProvider("https://sepolia.infura.io/v3/d0f4119a707544e7b1fcbc93c9bf659e");
+        const wineryContract = new ethers.Contract(
+            WineRegistryContract.address,
+            WineRegistryContract.output.abi,
+            provider);
+        return wineryContract
+        /* const balance = await tokenContract.balanceOf("0xabc...");
+        console.log('Balance:', balance.toString());
+    } */
+
     useEffect(() => {
-        if (address && contract && id) {
-            getWineById(address, id)
+        setLoading(true)
+        toast("Geting Wine Information")
+        const provider = new ethers.providers.JsonRpcProvider("https://sepolia.infura.io/v3/d0f4119a707544e7b1fcbc93c9bf659e");
+        const wineryContract = new ethers.Contract(
+            WineRegistryContract.address,
+            WineRegistryContract.output.abi,
+            provider);
+
+        if (provider && wineryContract && id && id.length) {
+            wineryContract.getWineById(id[0], id[1]).then(block_wine => {
+                console.log('Wine:', block_wine);
+                setWine(block_wine)
+                setLoading(false)
+            }).catch(err => {
+                setLoading(false)
+                console.error(err)
+            })
+
+            // getWineById(id[0], id[1])
         }
-    }, [contract, id, address,])
+
+        return () => setWine([])
+    }, [id])
 
     const deleteWine = async () => {
-        if (address.toLowerCase() === wine.owner.toLowerCase()) {
-            console.log("Delete Cliked")
+        if (address?.toLowerCase() === (wine.length && wine[0].toLowerCase())) {
+            console.log("Delete Clicked")
             try {
-                await removeWineById(address, wine.id)
-                getWineById(address, id)
+                await removeWineById(address, wine[2])
+                getWineById(address, id[1])
                 console.log("Wine Removed")
             } catch (error) {
                 console.error('Error removing wine:', error);
@@ -77,14 +113,14 @@ export default function Page({ params }) {
                                 src={"/new/1.webp"}
                                 width={555}
                                 height={1024}
-                                alt={wine?.name}
+                                alt={wine.length && wine[2]}
                                 className='mx-auto sticky top-10'
                             />
                         </div>
                         {/* Wine Details */}
                         <div className='md:pt-32'>
                             <h1 className='text-6xl leading-tight font-light text-[#545D5C] mb-5'>
-                                {wine?.name}
+                                {wine.length && wine[2]}
                             </h1>
                             {/* <p className='mb-5 font-medium text-[#B98D58]'>
                                 {wine?.price}
@@ -102,15 +138,15 @@ export default function Page({ params }) {
                             </p> */}
                             <p className='text-[#545D5C] font-serif text-lg flex items-center gap-3 mb-2'>
                                 <span className='font-medium'>Country:</span>
-                                <span className='font-extralight'>{wine?.country}</span>
+                                <span className='font-extralight'>{wine.length && wine[5]}</span>
                             </p>
                             <p className='text-[#545D5C] font-serif text-lg flex items-center gap-3 mb-2'>
                                 <span className='font-medium'>Region:</span>
-                                <span className='font-extralight'>{wine?.region}</span>
+                                <span className='font-extralight'>{wine.length && wine[4]}</span>
                             </p>
                             <p className='text-[#545D5C] font-serif text-lg flex items-center gap-3 mb-2'>
                                 <span className='font-medium'>Area:</span>
-                                <span className='font-extralight'>{wine?.area}</span>
+                                <span className='font-extralight'>{wine.length && wine[6]}</span>
                             </p>
                             {/* <p className='text-[#545D5C] font-serif text-lg flex items-center gap-3'>
                                 <span className='font-medium'>Type:</span>
@@ -137,7 +173,7 @@ export default function Page({ params }) {
                                 </a>
                             </span>
 
-                            {wine?.owner.toLowerCase() === address.toLowerCase() && (
+                            {(wine.length && wine[0].toLowerCase()) === address?.toLowerCase() && (
                                 <button
                                     className='mt-10 w-full px-4 py-2 rounded-lg bg-red-700/95 text-white active:scale-[0.98] flex items-center gap-3 justify-center'
                                     onClick={() => deleteWine()}
