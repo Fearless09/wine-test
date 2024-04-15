@@ -16,17 +16,17 @@ export default function Product({ item }) {
     }
     return (
         <div
-            className='relative border border-[#DEDDD9] p-4 rounded-lg shadow-lg'
+            className='relative rounded-lg shadow-lg'
         >
             {(address?.toLowerCase() === item.owner.toLowerCase()) && (
                 <button
-                    className='absolute z-20 right-4 top-4 rounded-full p-2 bg-red-200/50 text-red-700 flex items-center justify-center'
+                    className='absolute z-20 right-4 top-4 rounded-full p-2 bg-white/95 text-red-600 flex items-center justify-center'
                     onClick={() => deleteWine()}
                 >
                     <DeleteSVG />
                 </button>
             )}
-            <div className='h-[460px] overflow-hidden'>
+            <div className='h-[460px] overflow-hidden rounded-t-lg p-0 m-0'>
                 <Link
                     href={`/wine/${item?.id}`}
                 >

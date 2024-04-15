@@ -12,19 +12,19 @@ import WineRegistryContract from '../../blockchain/WineRegistry.json';
 
 export default function Page({ params }) {
     const router = useRouter()
-    const { contract, removeWineById, address, loading, setLoading } = useContext(AppContext)
+    const { contract, removeWineById, address, setLoading } = useContext(AppContext)
 
     const { id } = params
-    console.log(id)
+    // console.log(id)
     const [wine, setWine] = useState([])
     const currentURL = window.location.href
-    console.log(currentURL)
+    // console.log(currentURL)
 
-    const getWineById = async (ownerAddress, wineIndex) => {
+    const getWineById = async () => {
         setLoading(true)
         toast("Geting Wine Information")
         try {
-            const block_wine = await contract.getWineById(ownerAddress, wineIndex);
+            const block_wine = await contract.getWineById(address, id);
             console.log('Wine:', block_wine);
             setWine(block_wine)
             setLoading(false)

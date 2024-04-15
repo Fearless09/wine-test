@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 // import Products from "./components/Products";
 import useWineRegistry from './blockchain/useWineRegistry';
+import Products from "./components/Products";
 
 
 export default function Home() {
@@ -130,19 +131,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      {/* <Products /> */}
-      {provider && contract && (
-        <>
-          <input
-            type="text"
-            placeholder="Enter owner address"
-            value={ownerAddress}
-            onChange={(e) => setOwnerAddress(e.target.value)}
-          />
-          <button onClick={handlegetAllOwners}>Add Owner</button>
-          {/* Add buttons and UI elements to call other contract functions */}
-        </>
-      )}
+      <Products />
     </>
   );
 }
