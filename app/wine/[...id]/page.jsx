@@ -16,15 +16,15 @@ export default function Page({ params }) {
     const { contract, removeWineById, address, setLoading } = useContext(AppContext)
 
     const [wine, setWine] = useState([])
-    const currentURL = window.location.href
-    console.log(currentURL)
+    const currentURL = "window.location.href"
+    // console.log(currentURL)
 
     const getWineById = async (ownerAddress, wineIndex) => {
         setLoading(true)
         toast("Geting Wine Information")
         try {
             const block_wine = await contract.getWineById(ownerAddress, wineIndex);
-            console.log('Wine:', block_wine);
+            // console.log('Wine:', block_wine);
             setWine(block_wine)
             setLoading(false)
             return block_wine;
@@ -39,7 +39,7 @@ export default function Page({ params }) {
     useEffect(() => {
         setLoading(true)
         toast("Geting Wine Information")
-        const provider = new ethers.providers.JsonRpcProvider("https://sepolia.infura.io/v3/d0f4119a707544e7b1fcbc93c9bf659e");
+        const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_JSON_RPC_PROVIDER_URL);
         const wineryContract = new ethers.Contract(
             WineRegistryContract.address,
             WineRegistryContract.output.abi,
@@ -48,7 +48,7 @@ export default function Page({ params }) {
         if (provider && wineryContract && id && id.length) {
             wineryContract?.getWineById(id[0], id[1])
                 .then(block_wine => {
-                    console.log('Wine:', block_wine);
+                    // console.log('Wine:', block_wine);
                     setWine(block_wine)
                     setLoading(false)
                 }).catch(err => {
