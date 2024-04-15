@@ -5,7 +5,7 @@ import { AppContext } from '../Context'
 import { usePathname } from 'next/navigation'
 
 export default function NavBar() {
-    const { init, address, authorizedAddress, requestingAuthorization, setRequestingAuthorization, owner } = useContext(AppContext)
+    const { init, address, authorizedAddress, owner } = useContext(AppContext)
     const pathname = usePathname()
 
     return (
@@ -28,9 +28,6 @@ export default function NavBar() {
                         >
                             <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 rounded-full w-0 group-hover:w-full bg-[#B98D58] ${pathname === "/admin" && 'w-full'}`}></span>
                             <span className='p-2'>Admin</span>
-                            {requestingAuthorization?.length > 0 && (
-                                <span className=' absolute top-0 -translate-y-1/2 right-0 translate-x-1/2 w-6 aspect-square rounded-full bg-[#B98D58]/85 flex items-center justify-center font-medium text-sm'>{requestingAuthorization?.length}</span>
-                            )}
                         </Link>
                     )}
                     {/* Add Wine */}
@@ -42,18 +39,6 @@ export default function NavBar() {
                             <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 rounded-full w-0 group-hover:w-full bg-[#B98D58] ${pathname === "/addwine" && 'w-full'}`}></span>
                             <span className='p-2'>Add Wine</span>
                         </Link>
-                    )}
-                    {/* Request Authorization */}
-                    {address && !(authorizedAddress?.find(item => item.toLowerCase() === address?.toLowerCase())) && (
-                        <button
-                            className='px-2 py-1 rounded border border-white hover:bg-[#F9F8F4] hover:text-black active:scale-[0.98] text-sm disabled:cursor-not-allowed disabled:bg-[#F9F8F4] disabled:text-black'
-                            onClick={() => setRequestingAuthorization(prevArray => [...prevArray, address])}
-                            disabled={requestingAuthorization.find(item => item.toLowerCase() === address?.toLowerCase())}
-                        >
-                            {requestingAuthorization && requestingAuthorization.find(item => item.toLowerCase() === address?.toLowerCase())
-                                ? "Permission Requested"
-                                : "Request For Permission"}
-                        </button>
                     )}
                 </div>
 

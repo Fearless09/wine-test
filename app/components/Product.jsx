@@ -28,7 +28,7 @@ export default function Product({ item }) {
             )}
             <div className='h-[460px] overflow-hidden rounded-t-lg p-0 m-0'>
                 <Link
-                    href={`/wine/${item?.id}`}
+                    href={`/wine/${item.owner}/${item?.id}`}
                 >
                     <Image
                         src={"/wine.jpeg"}
@@ -41,17 +41,11 @@ export default function Product({ item }) {
             </div>
             <div className='text-center px-[10px] pb-[50px] w-[250px] mx-auto'>
                 <Link
-                    href={`/wine/${item?.id}`}
+                    href={`/wine/${item.owner}/${item?.id}`}
                 >
                     <h1 className='pt-7 pb-2 text-3xl leading-normal font-serif text-[#545C5D]'>
                         {item?.name}
                     </h1>
-                    {/* <p className='font-serif mb-2 text-[#242E35]'>
-                        {item.type}
-                    </p>
-                    <p className='font-medium text-[#b3af54]'>
-                        {item.price}
-                    </p> */}
                 </Link>
             </div>
         </div>

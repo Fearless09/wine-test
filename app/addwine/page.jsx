@@ -206,21 +206,6 @@ export default function Page() {
                                 required
                             />
                         </div> */}
-                        {/* Description */}
-                        {/* <div className='col-span-2 flex flex-col gap-2'>
-                            <label htmlFor="description" className='px-1'>
-                                Description:
-                            </label>
-                            <textarea
-                                name="description"
-                                cols="30"
-                                rows="10"
-                                className='py-3 px-2 rounded-lg border bg-[#B98D58]/15'
-                                onChange={handleChange}
-                                value={newWine.description}
-                                required
-                            ></textarea>
-                        </div> */}
                     </div>
                     <button
                         className='mt-11 w-full p-4 rounded-lg bg-[#B98D58] text-white font-semibold text-lg active:scale-[0.98]'

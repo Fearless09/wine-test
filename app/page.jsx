@@ -1,7 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
 import Header from "./components/Header";
-// import Products from "./components/Products";
 import useWineRegistry from './blockchain/useWineRegistry';
 import Products from "./components/Products";
 
@@ -22,9 +20,7 @@ export default function Home() {
     getStringOfBigNumber
   } = useWineRegistry();
 
-  const [ownerAddress, setOwnerAddress] = useState('');
-
-  const handlegetAllOwners = async () => {
+  // const handlegetAllOwners = async () => {
 
     //1. add owner
     // addOwner('0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3')
@@ -87,14 +83,14 @@ export default function Home() {
     //================
 
     //8. get a particular wine by address and id
-    const wine = await getWineById(
-      '0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3',
-      '0x5967d1b6e95f2350395f643f5be97eae726bd40febbc98ad6f2f1e7321e7ddfe'
-    ).catch(error => console.error(error))
+    // const wine = await getWineById(
+    //   '0x5CFb4D18bAfDb4A7E9663cf8CE87dB149D5611B3',
+    //   '0x5967d1b6e95f2350395f643f5be97eae726bd40febbc98ad6f2f1e7321e7ddfe'
+    // ).catch(error => console.error(error))
     //get values of type BigNumber like lotsize from blockchain response.
     //Note that we got a single wine
     // if (wine) console.log(getStringOfBigNumber(wine[3]))
-    if (wine) console.log(wine)
+    // if (wine) console.log(wine)
 
     //====================
 
@@ -107,7 +103,7 @@ export default function Home() {
       ]
     ) */
 
-  };
+  // };
 
   /* For NodeJS
   async function getData() {

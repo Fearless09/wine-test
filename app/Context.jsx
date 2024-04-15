@@ -12,7 +12,6 @@ export default function AppContextProvider({ children }) {
     // Owner's Address
     const [owner, setOwner] = useState("")
     const [authorizedAddress, setAuthorizedAddress] = useState(null)
-    const [requestingAuthorization, setRequestingAuthorization] = useState(["0x28C510604bb964E7A01A6C1E0D4B6fE0483f3688", "0xd872D69922F0462b50c38f8Fb70154e67A0A49Dc", "0x601C6F4962F4697831732c0Da481f16A06579c88"])
 
     const [wines, setWines] = useState(null)
     // Connected Address
@@ -223,7 +222,7 @@ export default function AppContextProvider({ children }) {
 
     return (
         <AppContext.Provider
-            value={{ init, contract, addOwner, removeOwner, addWine, removeWineById, wines, setWines, address, setAddress, owner, authorizedAddress, setAuthorizedAddress, setRequestingAuthorization, requestingAuthorization, loading, setLoading }}
+            value={{ init, contract, addOwner, removeOwner, addWine, removeWineById, wines, setWines, address, setAddress, owner, authorizedAddress, setAuthorizedAddress, loading, setLoading }}
         >
             {children}
         </AppContext.Provider>

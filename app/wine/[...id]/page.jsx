@@ -1,6 +1,6 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
-import { BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import Image from 'next/image'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
@@ -11,20 +11,19 @@ import { BackSVG, DeleteSVG } from '@/app/components/Svgs'
 import WineRegistryContract from '../../blockchain/WineRegistry.json';
 
 export default function Page({ params }) {
+    const { id } = params
     const router = useRouter()
     const { contract, removeWineById, address, setLoading } = useContext(AppContext)
 
-    const { id } = params
-    // console.log(id)
     const [wine, setWine] = useState([])
     const currentURL = window.location.href
-    // console.log(currentURL)
+    console.log(currentURL)
 
-    const getWineById = async () => {
+    const getWineById = async (ownerAddress, wineIndex) => {
         setLoading(true)
         toast("Geting Wine Information")
         try {
-            const block_wine = await contract.getWineById(address, id);
+            const block_wine = await contract.getWineById(ownerAddress, wineIndex);
             console.log('Wine:', block_wine);
             setWine(block_wine)
             setLoading(false)
@@ -37,17 +36,6 @@ export default function Page({ params }) {
         }
     };
 
-    /* const getContract = async () => {
-        const provider = new ethers.providers.JsonRpcProvider("https://sepolia.infura.io/v3/d0f4119a707544e7b1fcbc93c9bf659e");
-        const wineryContract = new ethers.Contract(
-            WineRegistryContract.address,
-            WineRegistryContract.output.abi,
-            provider);
-        return wineryContract
-        /* const balance = await tokenContract.balanceOf("0xabc...");
-        console.log('Balance:', balance.toString());
-    } */
-
     useEffect(() => {
         setLoading(true)
         toast("Geting Wine Information")
@@ -58,16 +46,15 @@ export default function Page({ params }) {
             provider);
 
         if (provider && wineryContract && id && id.length) {
-            wineryContract.getWineById(id[0], id[1]).then(block_wine => {
-                console.log('Wine:', block_wine);
-                setWine(block_wine)
-                setLoading(false)
-            }).catch(err => {
-                setLoading(false)
-                console.error(err)
-            })
-
-            // getWineById(id[0], id[1])
+            wineryContract?.getWineById(id[0], id[1])
+                .then(block_wine => {
+                    console.log('Wine:', block_wine);
+                    setWine(block_wine)
+                    setLoading(false)
+                }).catch(err => {
+                    setLoading(false)
+                    console.error(err)
+                })
         }
 
         return () => setWine([])
@@ -122,20 +109,10 @@ export default function Page({ params }) {
                             <h1 className='text-6xl leading-tight font-light text-[#545D5C] mb-5'>
                                 {wine.length && wine[2]}
                             </h1>
-                            {/* <p className='mb-5 font-medium text-[#B98D58]'>
-                                {wine?.price}
-                            </p>
-                            <p className='text-lg font-extralight text-[#545D5C] font-serif leading-8'>
-                                {wine?.description}
-                            </p> */}
 
                             <h4 className='py-5 my-5 border-b border-[#DEDDD9] text-[#545D5C] text-xl font-medium font-serif'>
                                 Technical
                             </h4>
-                            {/* <p className='text-[#545D5C] font-serif text-lg flex items-center gap-3 mb-2'>
-                                <span className='font-medium'>Harvest Date:</span>
-                                <span className='font-extralight'>{wine?.year}</span>
-                            </p> */}
                             <p className='text-[#545D5C] font-serif text-lg flex items-center gap-3 mb-2'>
                                 <span className='font-medium'>Country:</span>
                                 <span className='font-extralight'>{wine.length && wine[5]}</span>
@@ -148,10 +125,6 @@ export default function Page({ params }) {
                                 <span className='font-medium'>Area:</span>
                                 <span className='font-extralight'>{wine.length && wine[6]}</span>
                             </p>
-                            {/* <p className='text-[#545D5C] font-serif text-lg flex items-center gap-3'>
-                                <span className='font-medium'>Type:</span>
-                                <span className='font-extralight'>{wine?.type}</span>
-                            </p> */}
 
                             <h4 className='py-5 my-5 border-b border-[#DEDDD9] text-[#545D5C] text-xl font-medium font-serif'>
                                 QR Code
