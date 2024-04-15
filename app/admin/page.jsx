@@ -64,7 +64,7 @@ export default function Page() {
                     Authorized Address
                 </h4>
                 <ul className='flex flex-col gap1'>
-                    {authorizedAddress?.map((item, index) => (
+                    {authorizedAddress?.length && authorizedAddress?.map((item, index) => (
                         <li
                             className='p-3 pe-16 odd:bg-[#B98D58]/25 even:bg-[#B98D58]/10 hover:bg-white flex items-center gap-5 justify-between'
                             key={index}
