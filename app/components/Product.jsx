@@ -31,7 +31,7 @@ export default function Product({ item }) {
                     href={`/wine/${item.id}`}
                 >
                     <Image
-                        src={"/new/1.webp"}
+                        src={"/wine.jpeg"}
                         width={1080}
                         height={1080}
                         alt={item.name}

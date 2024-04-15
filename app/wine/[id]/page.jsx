@@ -74,7 +74,7 @@ export default function Page({ params }) {
                         {/* Wine Image */}
                         <div className='relative text-center'>
                             <Image
-                                src={"/new/1.webp"}
+                                src={"/wine.jpeg"}
                                 width={555}
                                 height={1024}
                                 alt={wine?.name}
