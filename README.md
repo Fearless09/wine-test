@@ -5,8 +5,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 - clone this repository using ```git clone https://github.com/Fearless09/wine-test.git```
 - After cloning the repository, install all the depedency using ```npm install```
-- Go to the `blockchain` folder, copy the code inside the `WineRegistry.sol`
-- Go to remix and recreate a file withe the name `WineRegistry.sol` and paste the code inside the folder
+- Deploy the smart contract e.g using Remix IDE. Go to the `blockchain` folder, copy the code inside the `WineRegistry.sol`
+- Go to remix and recreate a file with the name `WineRegistry.sol` and paste the code inside the folder
 - Compile the code in remix
 - Deploy the code in remix
 - Copy the `contract address` from remix
