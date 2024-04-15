@@ -16,7 +16,7 @@ export default function Page({ params }) {
     const { contract, removeWineById, address, setLoading } = useContext(AppContext)
 
     const [wine, setWine] = useState([])
-    const currentURL = "window.location.href"
+    const currentURL = window.location.href
     // console.log(currentURL)
 
     const getWineById = async (ownerAddress, wineIndex) => {
