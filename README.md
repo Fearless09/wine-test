@@ -11,6 +11,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - Deploy the code in remix
 - Copy the `contract address` from remix
 - Go to the `WineRegistry.json` file inside the `blockchain` folder and replace the address with your `contract address`
+- Create a `.env` file inside the `app` folder
+- paste this inside the `.env` file
+NEXT_PUBLIC_JSON_RPC_PROVIDER_URL_ID = d0f4119a707544e7b1fcbc93c9bf659e
+NEXT_PUBLIC_JSON_RPC_PROVIDER_URL = https://sepolia.infura.io/v3/$NEXT_PUBLIC_JSON_RPC_PROVIDER_URL_ID
 - Start the local server using ```npm run dev```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
