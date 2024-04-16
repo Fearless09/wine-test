@@ -18,7 +18,7 @@ npm install
 - Copy the `contract address` from the remix
 - Go to the `WineRegistry.json` file inside the `blockchain` folder and replace the address with your `contract address`
 - Create a `.env` file at the same level as the `app` folder
-- paste the below code inside the `.env` file 
+- Paste the below code inside the `.env` file 
 ```
 NEXT_PUBLIC_JSON_RPC_PROVIDER_URL_ID = d0f4119a707544e7b1fcbc93c9bf659e
 NEXT_PUBLIC_JSON_RPC_PROVIDER_URL = https://sepolia.infura.io/v3/$NEXT_PUBLIC_JSON_RPC_PROVIDER_URL_ID
