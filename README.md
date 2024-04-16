@@ -27,6 +27,7 @@ NEXT_PUBLIC_JSON_RPC_PROVIDER_URL = https://sepolia.infura.io/v3/$NEXT_PUBLIC_JS
 ```
 npm run dev
 ```
+- Visit `https://docs.google.com/document/d/1P0fc4tixnbiI4-4ZDCqhydoIWbh4DdxyWawiSbbsoK0/edit?usp=drive_link` for complete document of this project
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
